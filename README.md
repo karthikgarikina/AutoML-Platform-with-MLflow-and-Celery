@@ -181,7 +181,7 @@ Runtime data is intentionally ignored:
 - `uploads/*`
 - `output/*`
 
-Only `.gitkeep` and `.gitignore` files are committed in those folders. The evaluator will generate fresh job folders when it runs the app.
+Only `.gitkeep` and `.gitignore` files are committed in those folders.
 
 ## Checks
 
