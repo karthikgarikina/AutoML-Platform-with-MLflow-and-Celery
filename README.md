@@ -18,6 +18,7 @@ The API stays responsive while the worker handles long-running ML tasks in the b
 Clone the repository, then create local environment files from the examples:
 
 ```bash
+git clone https://github.com/karthikgarikina/AutoML-Platform-with-MLflow-and-Celery
 cp .env.example .env
 cp api/.env.example api/.env
 cp worker/.env.example worker/.env
