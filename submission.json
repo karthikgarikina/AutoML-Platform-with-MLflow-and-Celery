@@ -1,0 +1,6 @@
+{
+  "project": "automl-platform-with-mlflow-and-celery",
+  "api_url": "http://localhost:8000",
+  "mlflow_url": "http://localhost:5000",
+  "notes": "No credentials are required for local evaluation."
+}

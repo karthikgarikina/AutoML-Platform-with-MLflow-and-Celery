@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoML Operations Console</title>
+    <link rel="stylesheet" href="/static/styles.css?v=20260520-2" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Enterprise AutoML Platform</p>
+          <h1 id="page-title">Train, track, and package tabular ML jobs</h1>
+          <p class="subtitle">
+            Submit CSV datasets, let the worker search production-ready pipelines, and retrieve deployment assets with MLflow lineage.
+          </p>
+        </div>
+        <div class="status-strip" aria-label="Service status">
+          <span class="pulse"></span>
+          <span>API online</span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="panel upload-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">New job</p>
+              <h2>Dataset intake</h2>
+            </div>
+          </div>
+
+          <form id="job-form" class="job-form">
+            <label class="dropzone" for="file">
+              <input id="file" name="file" type="file" accept=".csv,text/csv" required />
+              <span class="drop-icon" aria-hidden="true">CSV</span>
+              <span class="drop-title">Choose a CSV dataset</span>
+              <span id="file-name" class="drop-meta">No file selected</span>
+            </label>
+
+            <div class="field-grid">
+              <label>
+                <span>Target column</span>
+                <input id="target_column" name="target_column" type="text" placeholder="species" required />
+              </label>
+              <label>
+                <span>Task type</span>
+                <select id="task_type" name="task_type" required>
+                  <option value="classification">Classification</option>
+                  <option value="regression">Regression</option>
+                </select>
+              </label>
+              <label>
+                <span>Time budget</span>
+                <input id="time_budget_seconds" name="time_budget_seconds" type="number" min="10" max="86400" value="60" required />
+              </label>
+            </div>
+
+            <button class="primary-btn" type="submit">
+              <span>Start AutoML job</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="panel monitor-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Monitor</p>
+              <h2>Job control</h2>
+            </div>
+          </div>
+
+          <div class="job-lookup">
+            <label>
+              <span>Job ID</span>
+              <input id="job-id" type="text" placeholder="Submit a job or paste an existing ID" />
+            </label>
+            <button id="check-status" class="icon-btn" type="button" title="Refresh status" aria-label="Refresh status">&#8635;</button>
+          </div>
+
+          <div class="timeline" aria-live="polite">
+            <div class="timeline-item active" data-step="PENDING">
+              <span></span>
+              <strong>Pending</strong>
+            </div>
+            <div class="timeline-item" data-step="RUNNING">
+              <span></span>
+              <strong>Running</strong>
+            </div>
+            <div class="timeline-item" data-step="SUCCESS">
+              <span></span>
+              <strong>Complete</strong>
+            </div>
+          </div>
+
+          <div id="status-card" class="status-card">
+            <p class="muted">No job selected yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="results-section" class="results-section hidden">
+        <div class="panel results-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Results</p>
+              <h2>Best model summary</h2>
+            </div>
+          </div>
+          <div id="result-grid" class="result-grid"></div>
+          <div class="artifact-links">
+            <a id="summary-link" href="#" target="_blank" rel="noreferrer">Open summary report</a>
+            <a id="profile-link" href="#" target="_blank" rel="noreferrer">Open data profile</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="system-grid">
+        <article>
+          <span>01</span>
+          <h3>Asynchronous training</h3>
+          <p>FastAPI accepts jobs immediately while Celery workers run AutoML workloads away from the request path.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Experiment lineage</h3>
+          <p>Each candidate pipeline logs parameters, metrics, tags, and best-model artifacts into a per-job MLflow experiment.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Deployment assets</h3>
+          <p>Every successful job exports a model package with FastAPI serving code, dependencies, and a Dockerfile.</p>
+        </article>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/static/app.js?v=20260520-2"></script>
+  </body>
+</html>
