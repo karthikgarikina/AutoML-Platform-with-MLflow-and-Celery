@@ -156,6 +156,9 @@ curl -X POST http://localhost:8080/predict \
 
 `deployment/main.py` loads `model.pkl` and exposes `/predict`; it is the serving code for the trained best model.
 
+## video demo
+https://www.youtube.com/watch?v=jXUVI3DCJiw
+
 ## Environment
 
 Required variables are documented in `.env.example`:
